@@ -1,0 +1,65 @@
+body {
+  font-family: "Arial", sans-serif;
+}
+
+.login-container {
+  height: 100vh;
+  display: flex;
+}
+
+.image-side {
+  background-image: url("/images/login-bg.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.form-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 50px;
+}
+
+.form-side h1 {
+  font-family: "Cursive", sans-serif;
+  color: #d594b6;
+  text-align: center;
+}
+
+.form-control {
+  margin-bottom: 15px;
+}
+
+.password-criteria {
+  font-size: 0.9rem;
+  color: gray;
+  margin-top: -10px;
+}
+
+.btn-primary {
+  background-color: #894c30;
+  border: none;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 10px;
+  text-transform: uppercase;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-primary:hover {
+  background-color: #6c3924;
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.register-link, .forgot-password-link {
+  color: #d594b6;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.register-link:hover, .forgot-password-link:hover {
+  text-decoration: underline;
+}

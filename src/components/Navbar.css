@@ -1,0 +1,51 @@
+/* Navbar.css */
+
+/* Style for the entire navbar */
+.MuiDrawer-paper {
+    background: white !important;
+    color: black !important;
+  }
+  
+  /* Style for the sidebar buttons */
+  .MuiListItem-root {
+    background-color: #d7a7aa !important;
+    border-radius: 5px;
+    margin: 5px 10px;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  .MuiListItem-root:hover {
+    background-color: #b58b8e !important;
+  }
+  
+  /* Style for the icons */
+  .MuiListItemIcon-root {
+    color: black !important;
+  }
+  
+  /* Style for the AppBar */
+  .MuiAppBar-root {
+    background: white !important;
+    color: black !important;
+    box-shadow: none;
+  }
+  
+  /* Style for the menu icon */
+  .MuiIconButton-root {
+    color: black !important;
+  }
+  
+  /* Style for the drawer close button */
+  .MuiDrawer-paper .MuiIconButton-root {
+    color: black !important;
+  }
+  
+  /* Style for RAFIA AND SUMBAL text */
+  .navbar-title {
+    font-family: "Fatura", sans-serif !important;
+    font-weight: bold !important;
+    font-size: 22px !important;
+    color: black !important;
+    margin-left: 10px;
+  }
+  
