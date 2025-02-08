@@ -1,9 +1,8 @@
-// src/components/Navbar.jsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 // Material UI Imports
-import { styled, useTheme } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -14,19 +13,20 @@ import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
-import Typography from "@mui/material/Typography"; // Import Typography for Text
+import Typography from "@mui/material/Typography"; // For text styling
 import "./Navbar.css";
 
 // Icons
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import HomeIcon from "@mui/icons-material/Home";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import StorefrontRoundedIcon from "@mui/icons-material/StorefrontRounded";
 import ShoppingBasketRoundedIcon from "@mui/icons-material/ShoppingBasketRounded";
 import DescriptionRoundedIcon from "@mui/icons-material/DescriptionRounded";
 import LogoutIcon from "@mui/icons-material/Logout";
 
-const drawerWidth = 240;
+const drawerWidth = 300;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
   ({ theme, open }) => ({
@@ -75,13 +75,13 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 
 const Navbar = ({ children }) => {
-  const theme = useTheme();
   const navigate = useNavigate();
   const [open, setOpen] = useState(true);
 
   const handleDrawerOpen = () => {
     setOpen(true);
   };
+
   const handleDrawerClose = () => {
     setOpen(false);
   };
@@ -93,26 +93,28 @@ const Navbar = ({ children }) => {
   };
 
   const menuItems = [
-    { text: "Dashboard", icon: <DashboardIcon />, route: "/admin/dashboard" },
+    { text: "Home", icon: <HomeIcon />, route: "/home" },
+    { text: "Dashboard", icon: <DashboardIcon />, route: "/home/dashboard" },
     {
       text: "Products",
       icon: <StorefrontRoundedIcon />,
-      route: "/admin/products",
+      route: "/home/products",
     },
     {
       text: "Orders",
       icon: <ShoppingBasketRoundedIcon />,
-      route: "/admin/orders",
+      route: "/home/orders",
     },
-    { text: "Blogs", icon: <DescriptionRoundedIcon />, route: "/admin/blogs" },
+    { text: "Blogs", icon: <DescriptionRoundedIcon />, route: "/home/blogs" },
   ];
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex", overflowX: "hidden" }}>
+      {" "}
+      {/* Removed scrolling issue */}
       {/* AppBar */}
       <AppBar position="fixed" open={open}>
         <Toolbar>
-          {/* Menu button (hidden when drawer is open) */}
           {!open && (
             <IconButton
               color="inherit"
@@ -124,19 +126,20 @@ const Navbar = ({ children }) => {
               <MenuIcon />
             </IconButton>
           )}
-          {/* RAFIA AND SUMBAL Text */}
-          <Typography className="navbar-title" variant="h6">
-            RAFIA AND SUMBAL
-          </Typography>
+          {/* Logo and Title */}
+          <Box sx={{ display: "flex", alignItems: "center", flexGrow: 1 }}>
+            <img src="/images/RSLogo.jpg" alt="Logo" className="navbar-logo" />
+            <Typography className="navbar-title" variant="h6">
+              RAFIA AND SUMBAL
+            </Typography>
+          </Box>
           {/* Logout button */}
-          <Box sx={{ flexGrow: 1 }} />
           <IconButton color="inherit" onClick={handleLogout}>
             <LogoutIcon />
           </IconButton>
         </Toolbar>
       </AppBar>
-
-      {/* Drawer / Sidebar */}
+      {/* Sidebar / Drawer */}
       <Drawer
         variant="persistent"
         anchor="left"
@@ -171,7 +174,6 @@ const Navbar = ({ children }) => {
           ))}
         </List>
       </Drawer>
-
       {/* Main Content */}
       <Main open={open}>
         <DrawerHeader />

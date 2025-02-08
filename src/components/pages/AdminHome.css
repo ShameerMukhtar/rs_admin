@@ -1,0 +1,42 @@
+/* src/pages/AdminHome.css */
+
+.welcome-container {
+  text-align: center;
+  margin: 40px 0;
+}
+
+.welcome-message {
+  font-size: 32px;
+  font-weight: bold;
+  color: #b58b8e;
+  animation: fadeIn 2s ease-in-out, bounce 3s infinite alternate;
+}
+
+.welcome-subtext {
+  font-size: 18px;
+  color: #666;
+  margin-top: 10px;
+  animation: fadeIn 3s ease-in-out;
+}
+
+/* Fade In Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Bounce Animation */
+@keyframes bounce {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(10px);
+  }
+}

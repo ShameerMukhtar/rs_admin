@@ -1,0 +1,114 @@
+/* General Container */
+.blogs-container {
+  padding: 20px;
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Add Blog Button - Changed to Icon */
+.add-blog-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  color: #d7a7aa;
+  transition: 0.3s ease-in-out;
+}
+
+.add-blog-btn:hover {
+  color: #b58b8e;
+}
+
+/* Blog Form */
+.blog-form {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 500px;
+  margin: 20px auto;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.blog-form input,
+.blog-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.blog-form button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+/* Submit Button */
+.blog-form button[type="submit"] {
+  background: #d7a7aa;
+  color: white;
+}
+
+.blog-form button[type="submit"]:hover {
+  background: #b58b8e;
+}
+
+/* Cancel Button */
+.blog-form button[type="button"] {
+  background: #ddd;
+  color: black;
+}
+
+.blog-form button[type="button"]:hover {
+  background: #bbb;
+}
+
+/* Blog List Styling */
+.blog-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* Individual Blog Card */
+.blog-item {
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+  transition: 0.3s ease-in-out;
+}
+
+.blog-item:hover {
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Blog Actions */
+.blog-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 600px) {
+  .blog-item {
+    width: 90%;
+  }
+
+  .blog-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
