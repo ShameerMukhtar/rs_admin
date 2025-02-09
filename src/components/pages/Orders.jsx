@@ -8,7 +8,8 @@ const Orders = () => {
   const [selectedStatus, setSelectedStatus] = useState("all");
   const [trackingId, setTrackingId] = useState("");
   const [loading, setLoading] = useState(false);
-  const [selectedOrder, setSelectedOrder] = useState(null); // State for selected order cart
+  const [selectedOrder, setSelectedOrder] = useState(null);
+  const [showOnlyCart, setShowOnlyCart] = useState(false);
 
   useEffect(() => {
     fetchOrders();
@@ -122,12 +123,12 @@ const Orders = () => {
           <thead>
             <tr>
               <th>Order ID</th>
-              <th>Email</th>
               <th>Phone</th>
               <th>City</th>
               <th>Tracking ID</th>
               <th>Status</th>
               <th>Total Price</th>
+              <th>Payment Method</th>
               <th>Actions</th>
               <th>Cart</th>
             </tr>
@@ -135,13 +136,24 @@ const Orders = () => {
           <tbody>
             {filteredOrders.map((order) => (
               <tr key={order._id}>
-                <td data-label="Order ID">{order._id}</td>
-                <td data-label="Email">{order.email}</td>
+                <td
+                  data-label="Order ID"
+                  onClick={() => {
+                    setSelectedOrder(order);
+                    setShowOnlyCart(false); // Show full details
+                  }}
+                  style={{ cursor: "pointer", color: "#007bff" }}
+                >
+                  {order._id}
+                </td>
                 <td data-label="Phone">{order.phone}</td>
                 <td data-label="City">{order.city}</td>
-                <td data-label="Tracking ID">{order.trackingId || "Null"}</td>
+                <td data-label="Tracking ID">{order.trackingId || "N/A"}</td>
                 <td data-label="Status">{order.status}</td>
                 <td data-label="Total Price">Rs {order.totalPrice}</td>
+                <td data-label="Payment Method">
+                  {order.paymentMethod || "N/A"}
+                </td>
                 <td data-label="Actions">
                   {order.status === "pending" && (
                     <button
@@ -160,12 +172,24 @@ const Orders = () => {
                         onChange={(e) => setTrackingId(e.target.value)}
                         className="tracking-input"
                       />
-                      <button
-                        className="ship-btn"
-                        onClick={() => updateOrderStatus(order._id, "shipped")}
-                      >
-                        Ship
-                      </button>
+                      <div className="action-buttons">
+                        <button
+                          className="ship-btn"
+                          onClick={() =>
+                            updateOrderStatus(order._id, "shipped")
+                          }
+                        >
+                          Ship
+                        </button>
+                        <button
+                          className="cancel-btn"
+                          onClick={() =>
+                            updateOrderStatus(order._id, "cancelled")
+                          }
+                        >
+                          Cancel
+                        </button>
+                      </div>
                     </>
                   )}
                   {order.status === "shipped" && (
@@ -176,22 +200,14 @@ const Orders = () => {
                       Deliver
                     </button>
                   )}
-                  {order.status !== "cancelled" &&
-                    order.status !== "delivered" && (
-                      <button
-                        className="cancel-btn"
-                        onClick={() =>
-                          updateOrderStatus(order._id, "cancelled")
-                        }
-                      >
-                        Cancel
-                      </button>
-                    )}
                 </td>
                 <td data-label="Cart">
                   <FaEye
                     className="eye-icon"
-                    onClick={() => setSelectedOrder(order)}
+                    onClick={() => {
+                      setSelectedOrder(order);
+                      setShowOnlyCart(true); // Show only cart
+                    }}
                   />
                 </td>
               </tr>
@@ -200,17 +216,50 @@ const Orders = () => {
         </table>
       </div>
 
-      {/* Cart Modal */}
+      {/* Order Details & Cart Modal */}
       {selectedOrder && (
         <div className="cart-modal">
           <div className="cart-content">
-            <h2>Order Cart</h2>
+            <h2>{showOnlyCart ? "Cart Items" : "Order Details"}</h2>
             <button
               className="close-btn"
               onClick={() => setSelectedOrder(null)}
             >
               X
             </button>
+
+            {!showOnlyCart && (
+              <>
+                <p>
+                  <strong>Name:</strong> {selectedOrder.firstName}{" "}
+                  {selectedOrder.lastName}
+                </p>
+                <p>
+                  <strong>Email:</strong> {selectedOrder.email}
+                </p>
+                <p>
+                  <strong>Address:</strong> {selectedOrder.address},{" "}
+                  {selectedOrder.city}
+                </p>
+                <p>
+                  <strong>Zip Code:</strong> {selectedOrder.zipCode}
+                </p>
+                <p>
+                  <strong>Phone:</strong> {selectedOrder.phone}
+                </p>
+                <p>
+                  <strong>Payment Method:</strong> {selectedOrder.paymentMethod}
+                </p>
+                <p>
+                  <strong>Status:</strong> {selectedOrder.status}
+                </p>
+                <p>
+                  <strong>Total Price:</strong> Rs {selectedOrder.totalPrice}
+                </p>
+              </>
+            )}
+
+            {/* Cart Table */}
             <table className="cart-table">
               <thead>
                 <tr>
@@ -223,10 +272,10 @@ const Orders = () => {
               <tbody>
                 {selectedOrder.cart.map((item, index) => (
                   <tr key={index}>
-                    <td data-label="Product">{item.title}</td>
-                    <td data-label="Size">{item.size || "N/A"}</td>
-                    <td data-label="Quantity">{item.quantity}</td>
-                    <td data-label="Price">Rs {item.price}</td>
+                    <td>{item.title}</td>
+                    <td>{item.size || "N/A"}</td>
+                    <td>{item.quantity}</td>
+                    <td>Rs {item.price}</td>
                   </tr>
                 ))}
               </tbody>
